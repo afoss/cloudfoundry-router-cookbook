@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "nginx"
+include_recipe "cloudfoundry-nginx::lua_module"
 
 template File.join(node[:nginx][:dir], "sites-available", "router") do
   source "nginx.conf.erb"
