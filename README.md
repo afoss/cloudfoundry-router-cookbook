@@ -19,7 +19,7 @@ Cookbooks
 ---------
 
 Requires Opscode's bluepill cookbook for creating init scripts and
-trotter's cloudfoundry-common cookbook. Also requires Opscode's nginx
+trotter's cloudfoundry cookbook. Also requires Opscode's nginx
 cookbook for installing and configuring the nginx server that fronts the
 router.
 
@@ -37,10 +37,10 @@ Attributes
 ==========
 
 * `cloudfoundry_router[:socket_file]` - Unix socket for the connection between the router and nginx. Default is `/tmp/router.sock"`.
-* `cloudfoundry_router[:access_log]` - Where to write the Router's access log. Default is `File.join(node[:cloudfoundry_common][:log_dir], "vcap.access.log")`.
+* `cloudfoundry_router[:access_log]` - Where to write the Router's access log. Default is `File.join(node['cloudfoundry']['log_dir'], "vcap.access.log")`.
 * `cloudfoundry_router[:log_level]` - Log level for the router. Default is `info"`.
-* `cloudfoundry_router[:log_file]` - Where to write the Router's logs. XXX (trotter): I'm not certain this attribute actually works. Default is `File.join(node[:cloudfoundry_common][:log_dir], "router.log")`.
-* `cloudfoundry_router[:pid_file]` - Where to write the Router's pid. Default is `File.join(node[:cloudfoundry_common][:pid_dir], "router.pid")`.
+* `cloudfoundry_router[:log_file]` - Where to write the Router's logs. XXX (trotter): I'm not certain this attribute actually works. Default is `File.join(node['cloudfoundry']['log_dir'], "router.log")`.
+* `cloudfoundry_router[:pid_file]` - Where to write the Router's pid. Default is `File.join(node['cloudfoundry']['pid_dir'], "router.pid")`.
 
 License and Author
 ==================

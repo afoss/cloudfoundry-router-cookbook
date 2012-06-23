@@ -9,6 +9,6 @@ version          "0.0.1"
   supports os
 end
 
-%w{ cloudfoundry-common cloudfoundry-nginx }.each do |cb|
+%w{ cloudfoundry cloudfoundry-nginx }.each do |cb|
   depends cb
 end

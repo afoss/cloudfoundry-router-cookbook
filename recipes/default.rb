@@ -17,6 +17,12 @@
 # limitations under the License.
 #
 
+cloudfoundry_source "router" do
+  path          node['cloudfoundry_router']['vcap']['install_path']
+  repository    node['cloudfoundry_router']['vcap']['repo']
+  reference     node['cloudfoundry_router']['vcap']['reference']
+end
+
 include_recipe "cloudfoundry-nginx::lua_module"
 
 template File.join(node[:nginx][:dir], "sites-available", "router") do
@@ -27,11 +33,20 @@ template File.join(node[:nginx][:dir], "sites-available", "router") do
   notifies :restart, "service[nginx]"
 end
 
-nginx_site "router"
+nginx_site "router" do
+  nxpath File.join(node[:nginx][:path], "sbin")
+end
 
 # nginx recipe adds a default site. It gets in our way, so we remove it.
 nginx_site "default" do
+  nxpath File.join(node[:nginx][:path], "sbin")
   enable false
 end
 
-cloudfoundry_component "router"
+cloudfoundry_component "router" do
+  install_path  node['cloudfoundry_router']['vcap']['install_path']
+  pid_file      node['cloudfoundry_router']['pid_file']
+  log_file      node['cloudfoundry_router']['log_file']
+  action        [:create, :enable]
+  subscribes    :restart, resources(:cloudfoundry_source => "router")
+end
