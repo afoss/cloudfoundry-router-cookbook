@@ -25,7 +25,7 @@ end
 
 include_recipe "cloudfoundry-nginx::lua_module"
 
-template File.join(node[:nginx][:dir], "sites-available", "router") do
+template File.join(node['nginx']['dir'], "sites-available", "router") do
   source "nginx.conf.erb"
   owner  "root"
   group  "root"
@@ -34,12 +34,12 @@ template File.join(node[:nginx][:dir], "sites-available", "router") do
 end
 
 nginx_site "router" do
-  nxpath File.join(node[:nginx][:path], "sbin")
+  nxpath File.join(node['nginx']['path'], "sbin")
 end
 
 # nginx recipe adds a default site. It gets in our way, so we remove it.
 nginx_site "default" do
-  nxpath File.join(node[:nginx][:path], "sbin")
+  nxpath File.join(node['nginx']['path'], "sbin")
   enable false
 end
 
