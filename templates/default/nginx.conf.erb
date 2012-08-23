@@ -7,6 +7,9 @@ access_log   <%= node['nginx']['log_dir'] %>/nginx_main_access.log main;
 
 client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
 
+lua_package_path "<%= node['lua']['module_path'] %>/?.lua;;";
+lua_package_cpath "<%= node['lua']['module_path'] %>/?.so;;";
+
 upstream router_status {
   server <%= node['cloudfoundry_router']['uls_ip'] %>:<%= node['cloudfoundry_router']['uls_port'] %>;
 }
@@ -50,9 +53,6 @@ server {
       # if we have multiple workers, there will be still few stats not synced for
       # the workers which don't get this monitor request.
       access_by_lua '
-        -- add package.path and package.cpath
-        package.path = package.path..";<%= node[:lua][:module_path] %>/?.lua"
-        package.cpath = package.cpath..";<%= node[:lua][:module_path] %>/?.so"
         local uls = require ("uls")
 
         ngx.log(ngx.DEBUG, "monitor trigger stats syncup")
@@ -85,9 +85,6 @@ server {
       set $sticky '';
 
       access_by_lua '
-        -- add package.path and package.cpath
-        package.path = package.path..";<%= node[:lua][:module_path] %>/?.lua"
-        package.cpath = package.cpath..";<%= node[:lua][:module_path] %>/?.so"
         local uls = require ("uls")
 
         uls.pre_process_subrequest(ngx, "<%= node['cloudfoundry_router']['trace_key'] %>")
@@ -106,9 +103,6 @@ server {
 
       # Handling response from backend servers
       header_filter_by_lua '
-        -- add package.path and package.cpath
-        package.path = package.path..";<%= node[:lua][:module_path] %>/?.lua"
-        package.cpath = package.cpath..";<%= node[:lua][:module_path] %>/?.so"
         local uls = require ("uls")
 
         uls.post_process_response(ngx)
