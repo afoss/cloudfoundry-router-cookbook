@@ -8,7 +8,7 @@ default['cloudfoundry_router']['vcap']['repo']         = "https://github.com/clo
 
 # Git reference to use when fetching the CloudFoundry code. Can be
 # either a specific sha or a reference such as `HEAD` or `master`.
-default['cloudfoundry_router']['vcap']['reference']    = "8a3d41b5dc06a472d27f7cabe6f61c668075ac47"
+default['cloudfoundry_router']['vcap']['reference']    = "346867cfa72a7d0e9d8f80fa4cfa95261834c260"
 
 # IP address of the interface to bind to; i.e. the nginx vhost.
 default['cloudfoundry_router']['listen_ip'] = "0.0.0.0"
