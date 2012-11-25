@@ -23,23 +23,22 @@ cloudfoundry_source "router" do
   reference     node['cloudfoundry_router']['vcap']['reference']
 end
 
-include_recipe "cloudfoundry-nginx::lua_module"
+include_recipe "cloudfoundry-nginx"
+include_recipe "cloudfoundry-router::lua_modules"
 
 template File.join(node['nginx']['dir'], "sites-available", "router") do
   source "nginx.conf.erb"
   owner  "root"
   group  "root"
   mode   "0644"
+  variables :lua_package_path => File.join(node['cloudfoundry_router']['vcap']['install_path'], "ext", "nginx")
   notifies :restart, "service[nginx]"
 end
 
-nginx_site "router" do
-  nxpath File.join(node['nginx']['path'], "sbin")
-end
+nginx_site "router"
 
 # nginx recipe adds a default site. It gets in our way, so we remove it.
 nginx_site "default" do
-  nxpath File.join(node['nginx']['path'], "sbin")
   enable false
 end
 

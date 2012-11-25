@@ -7,8 +7,8 @@ access_log   <%= node['nginx']['log_dir'] %>/nginx_main_access.log main;
 
 client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
 
-lua_package_path "<%= node['lua']['module_path'] %>/?.lua;;";
-lua_package_cpath "<%= node['lua']['module_path'] %>/?.so;;";
+lua_package_path "<%= @lua_package_path %>/?.lua;;";
+lua_package_cpath "<%= @lua_package_path %>/?.so;;";
 
 upstream router_status {
   server <%= node['cloudfoundry_router']['uls_ip'] %>:<%= node['cloudfoundry_router']['uls_port'] %>;
