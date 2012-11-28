@@ -27,7 +27,7 @@ server {
     # Given there are some exceptions to clear some headers,
     # we just leave them as is.
 
-    proxy_pass http://unix:/tmp/router.sock:/;
+    proxy_pass http://unix:<%= node['cloudfoundry_router']['socket_file'] %>:/;
   }
 
   location / {
