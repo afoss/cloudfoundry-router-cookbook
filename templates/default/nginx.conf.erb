@@ -57,12 +57,9 @@ server {
         local uls = require ("uls")
 
         uls.pre_process_subrequest(ngx, "<%= node['cloudfoundry_router']['trace_key'] %>")
-
-        local req = uls.generate_uls_request(ngx)
-
-        -- generate one subrequest to uls for querying
+        -- generate one subrequest to uls for url query
         local res = ngx.location.capture(
-          "/vcapuls", { body = req }
+          "/vcapuls", {body = uls.generate_uls_request(ngx)}
         )
 
         uls.post_process_subrequest(ngx, res)
