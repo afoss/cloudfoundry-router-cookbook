@@ -17,6 +17,14 @@
 # limitations under the License.
 #
 
+ruby_ver = node['cloudfoundry_router']['ruby_version']
+ruby_path = ruby_bin_path(ruby_ver)
+
+include_recipe "rbenv::default"
+include_recipe "rbenv::ruby_build"
+
+rbenv_ruby ruby_ver
+
 cloudfoundry_source "router" do
   path          node['cloudfoundry_router']['vcap']['install_path']
   repository    node['cloudfoundry_router']['vcap']['repo']

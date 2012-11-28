@@ -10,6 +10,8 @@ default['cloudfoundry_router']['vcap']['repo']         = "https://github.com/clo
 # either a specific sha or a reference such as `HEAD` or `master`.
 default['cloudfoundry_router']['vcap']['reference']    = "346867cfa72a7d0e9d8f80fa4cfa95261834c260"
 
+default['cloudfoundry_router']['ruby_version'] = node['cloudfoundry']['ruby_1_9_2_version']
+
 # IP address of the interface to bind to; i.e. the nginx vhost.
 default['cloudfoundry_router']['listen_ip'] = "0.0.0.0"
 
