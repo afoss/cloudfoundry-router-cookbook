@@ -31,12 +31,6 @@ default['cloudfoundry_router']['listen_port'] = "80"
 default['cloudfoundry_router']['socket_file'] = "/tmp/router.sock"
 default['cloudfoundry_router']['access_log'] = File.join(node['cloudfoundry']['log_dir'], "vcap.access.log")
 default['cloudfoundry_router']['client_max_body_size'] = "256M"
-default['cloudfoundry_router']['session_key']    = "14fbc303b76bacd1e0a3ab641c11d11400341c5d"
-default['cloudfoundry_router']['trace_key']    = "222"
-default['cloudfoundry_router']['uls_ip'] = "localhost"
-default['cloudfoundry_router']['uls_port'] = 8081
-default['cloudfoundry_router']['status_user'] = "admin"
-default['cloudfoundry_router']['status_passwd'] = "password"
 
 default['cloudfoundry_router']['log_level'] = "info"
 default['cloudfoundry_router']['log_file'] = File.join(node['cloudfoundry']['log_dir'], "router.log")
