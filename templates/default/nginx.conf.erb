@@ -10,10 +10,6 @@ client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
 lua_package_path "<%= @lua_package_path %>/?.lua;;";
 lua_package_cpath "<%= @lua_package_path %>/?.so;;";
 
-upstream router_status {
-  server <%= node['cloudfoundry_router']['uls_ip'] %>:<%= node['cloudfoundry_router']['uls_port'] %>;
-}
-
 server {
   listen       <%= node['cloudfoundry_router']['listen_ip'] %>:<%= node['cloudfoundry_router']['listen_port'] %>;
   server_name  _;
@@ -42,33 +38,6 @@ server {
 
     set $health_monitor '';
     set $app_id 0;
-    if ($http_user_agent = "HTTP-Monitor/1.1") {
-      set $health_monitor T;
-    }
-    if ($http_host = "") {
-      set $health_monitor "${health_monitor}T";
-    }
-    if ($health_monitor = TT) {
-      # Trigger a subrequest to sync the latest few stats of the worker to uls,
-      # if we have multiple workers, there will be still few stats not synced for
-      # the workers which don't get this monitor request.
-      access_by_lua '
-        local uls = require ("uls")
-
-        ngx.log(ngx.DEBUG, "monitor trigger stats syncup")
-
-        local req = uls.generate_stats_request()
-
-        -- generate one subrequest to uls to update stats
-        ngx.location.capture(
-          "/vcapuls", { body = req }
-        )
-      ';
-
-      more_set_input_headers "Authorization: Basic <%= Base64.encode64("#{node['cloudfoundry_router']['status_user']}:#{node['cloudfoundry_router']['status_passwd']}").strip %>";
-      rewrite ^.*$ /healthz break;
-      proxy_pass                 http://router_status;
-    }
 
     # We intend to have one "if" block to avoid the above monitor location
     # to twist with below upstream locator server handling.
