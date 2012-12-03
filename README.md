@@ -16,13 +16,14 @@ Platform
 Tested on:
 
 * Ubuntu 10.04
+* Ubuntu 12.04
 
 Cookbooks
 ---------
 
 * cloudfoundry
 * cloudfoundry-nginx
-* cloudfoundry-rbenv
+* rbenv
 
 Usage
 =====
