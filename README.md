@@ -22,6 +22,7 @@ Cookbooks
 
 * cloudfoundry
 * cloudfoundry-nginx
+* cloudfoundry-rbenv
 
 Usage
 =====
@@ -69,9 +70,11 @@ pid file. Default is `File.join(node['cloudfoundry']['pid_dir'], "router.pid")`.
 License and Author
 ==================
 
-Author:: Trotter Cashion (<cashion@gmail.com>)
+* Author:: Andrea Campi (<andrea.campi@zephirworks.com>)
+* Author:: Trotter Cashion (<cashion@gmail.com>)
 
-Copyright:: 2012 Trotter Cashion
+* Copyright:: 2012 ZephirWorks
+* Copyright:: 2012 Trotter Cashion
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
