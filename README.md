@@ -48,7 +48,7 @@ such as `HEAD` or `master`. Defaults to the last revision that has been
 tested with the `cloudfoundry` family of cookbooks.
 * `node['cloudfoundry_router']['ruby_version']` - Version of the ruby
 interpreter to use to run the stager daemon. Defaults to
-`node['cloudfoundry']['ruby_1_9_2_version']`.
+`node['cloudfoundry']['ruby_version']`.
 * `node['cloudfoundry_router']['listen_ip']` - IP address of the interface
 that nginx will bind to. Defaults to `0.0.0.0`.
 * `node['cloudfoundry_router']['listen_port']` - TCP port that nginx

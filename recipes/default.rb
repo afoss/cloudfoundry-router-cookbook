@@ -30,6 +30,7 @@ cloudfoundry_source "router" do
   path          node['cloudfoundry_router']['vcap']['install_path']
   repository    node['cloudfoundry_router']['vcap']['repo']
   reference     node['cloudfoundry_router']['vcap']['reference']
+  ruby_version  ruby_ver
 end
 
 include_recipe "cloudfoundry-nginx"
@@ -53,6 +54,7 @@ end
 
 cloudfoundry_component "router" do
   install_path  node['cloudfoundry_router']['vcap']['install_path']
+  ruby_version  ruby_ver
   pid_file      node['cloudfoundry_router']['pid_file']
   log_file      node['cloudfoundry_router']['log_file']
   action        [:create, :enable]
