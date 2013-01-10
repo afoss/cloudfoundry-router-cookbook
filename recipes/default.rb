@@ -58,5 +58,5 @@ cloudfoundry_component "router" do
   pid_file      node['cloudfoundry_router']['pid_file']
   log_file      node['cloudfoundry_router']['log_file']
   action        [:create, :enable]
-  subscribes    :restart, resources(:cloudfoundry_source => "router")
+  subscribes    :restart, "cloudfoundry_source[router]"
 end
