@@ -5,8 +5,6 @@ log_format main  '$host - [$time_local] '
 
 access_log   <%= node['nginx']['log_dir'] %>/nginx_main_access.log main;
 
-client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
-
 lua_package_path "<%= @lua_package_path %>/?.lua;;";
 lua_package_cpath "<%= @lua_package_path %>/?.so;;";
 
@@ -14,6 +12,7 @@ server {
   listen       <%= node['cloudfoundry_router']['listen_ip'] %>:<%= node['cloudfoundry_router']['listen_port'] %>;
   server_name  _;
   server_name_in_redirect off;
+  client_max_body_size <%= node['cloudfoundry_router']['client_max_body_size'] %>;
 
   #TODO: how to make this internal location totally transparent to outside
   location = /vcapuls {
