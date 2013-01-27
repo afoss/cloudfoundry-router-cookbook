@@ -24,8 +24,6 @@ default['cloudfoundry_router']['vcap']['install_path'] = "/srv/vcap-router"
 default['cloudfoundry_router']['vcap']['repo']         = "https://github.com/cloudfoundry/router.git"
 default['cloudfoundry_router']['vcap']['reference']    = "346867cfa72a7d0e9d8f80fa4cfa95261834c260"
 
-default['cloudfoundry_router']['ruby_version'] = node['cloudfoundry']['ruby_version']
-
 default['cloudfoundry_router']['listen_ip'] = "0.0.0.0"
 default['cloudfoundry_router']['listen_port'] = "80"
 default['cloudfoundry_router']['socket_file'] = "/tmp/router.sock"

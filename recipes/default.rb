@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+node.default['cloudfoundry_router']['ruby_version'] = node['cloudfoundry']['ruby_version']
 ruby_ver = node['cloudfoundry_router']['ruby_version']
 ruby_path = ruby_bin_path(ruby_ver)
 
