@@ -22,16 +22,14 @@ lua_package_path = File.join(node['cloudfoundry_router']['vcap']['install_path']
 
 package "liblua5.1-0-dev"
 
-git "/tmp/lua-cjson" do
+git "#{Chef::Config['file_cache_path']}/lua-cjson" do
   repository "https://github.com/efelix/lua-cjson"
   revision "bc9ca501a5469ebd5fb6019007166524aa592977"
-  user node['cloudfoundry']['user']
   action :sync
 end
 
 bash "Install lua json" do
-  cwd "/tmp/lua-cjson"
-  user node['cloudfoundry']['user']
+  cwd "#{Chef::Config['file_cache_path']}/lua-cjson"
   code <<-EOH
     LUA_INCLUDE_DIR=/usr/include/lua5.1 make
     LUA_LIB_DIR=#{lua_package_path} make install
